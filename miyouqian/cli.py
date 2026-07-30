@@ -146,7 +146,7 @@ def command_serve(config_path: pathlib.Path, host: str | None, port: int | None)
     config = load_config(config_path)
     web = config.get("web", {})
     effective_host = host or str(web.get("host", "127.0.0.1"))
-    effective_port = port or int(web.get("port", 5890))
+    effective_port = port or int(web.get("port", 15890))
     serve(config_path, effective_host, effective_port)
     return 0
 
@@ -183,7 +183,7 @@ def command_show(config_path: pathlib.Path) -> int:
     print(f"凭证文件: {credentials_path(config_path, config).resolve()}")
     print(f"日志文件: {log_path(config_path, config).resolve()}")
     web = config.get("web", {})
-    print(f"Web 控制台: {web.get('host', '127.0.0.1')}:{web.get('port', 5890)}")
+    print(f"Web 控制台: {web.get('host', '127.0.0.1')}:{web.get('port', 15890)}")
     return 0
 
 

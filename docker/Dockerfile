@@ -29,14 +29,14 @@ RUN groupadd --system myq \
     && chmod +x /entrypoint.sh \
     && chown -R myq:myq /app /app/state /entrypoint.sh /opt/venv
 
-EXPOSE 5890
+EXPOSE 15890
 
 VOLUME ["/app/state"]
 
 USER myq
 
 HEALTHCHECK --interval=60s --timeout=5s --start-period=20s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5890/api/auth/status', timeout=3).read()"
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:15890/api/auth/status', timeout=3).read()"
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "main.py", "--config", "/app/state/config.yaml", "serve", "--host", "0.0.0.0", "--port", "5890"]
+CMD ["python", "main.py", "--config", "/app/state/config.yaml", "serve", "--host", "0.0.0.0", "--port", "15890"]
